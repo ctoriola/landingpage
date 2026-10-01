@@ -249,6 +249,25 @@
     --base: translate3d(80px, -20px, 40px) rotateX(18deg) rotateY(28deg) rotateZ(-14deg);
     transform: var(--base);
   }
+  /* photo covers */
+  .card .cover {
+    position: absolute; inset: 0; border-radius: inherit; z-index: 0;
+    background-size: cover; background-repeat: no-repeat;
+    transition: transform 1.2s cubic-bezier(.2,.8,.2,1);
+  }
+  .card .cover::after { /* keep the labels legible over the photo */
+    content: ""; position: absolute; inset: 0; border-radius: inherit;
+    background: linear-gradient(180deg, rgba(3,10,25,.55) 0%, rgba(3,10,25,.05) 30%, rgba(3,10,25,.15) 50%, rgba(5,20,50,.88) 100%);
+  }
+  .card-dev .cover { background-image: url("assets/card-dev.jpg"); background-position: 45% 30%; }
+  .card-design .cover { background-image: url("assets/card-design.jpg"); background-position: 50% 25%; }
+  .stage.is-dev .card-dev .cover, .stage.is-design .card-design .cover { transform: scale(1.06); }
+  .card > *:not(.cover) { position: relative; z-index: 1; }
+  .card { justify-content: flex-start; }
+  .card > .card-top + div { margin-top: auto; }
+  .card .go { margin-top: 16px; }
+  .card-design { color: var(--ink); }
+  .card h2 { text-shadow: 0 2px 18px rgba(0,0,0,.5); }
   .card-top { display: flex; justify-content: space-between; align-items: flex-start; transform: translateZ(40px); }
   .card-tag { font-size: 11px; letter-spacing: .14em; text-transform: uppercase; opacity: .75; }
   .card-chip {
@@ -523,6 +542,7 @@
     <a class="hit hit-design" data-site="design" href="https://design.charlestoriola.com" aria-label="Design work — design.charlestoriola.com"></a>
     <div class="floaty">
       <div class="card card-dev">
+        <div class="cover" aria-hidden="true"></div>
         <div class="card-top"><span class="card-tag">01 / Build</span><span class="card-chip"></span></div>
         <div>
           <h2>Developer</h2>
@@ -531,6 +551,7 @@
         <span class="go">Enter <span>→</span></span>
       </div>
       <div class="card card-design">
+        <div class="cover" aria-hidden="true"></div>
         <div class="card-top"><span class="card-tag">02 / Craft</span><span class="card-chip"></span></div>
         <div>
           <h2>Designer</h2>
