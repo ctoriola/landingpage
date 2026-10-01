@@ -141,23 +141,46 @@
   .card .go span { transition: transform .4s; }
   .card:hover .go span { transform: translateX(6px); }
 
-  /* Hover choreography: hovered card comes forward and flattens, the other recedes */
-  .stage:hover .card { filter: brightness(.55) saturate(.8); }
-  .stage .card:hover { filter: none; z-index: 3; }
-  .stage:hover .card-dev:hover,
-  .stage:hover .card-design:hover {
-    transform: translate3d(var(--hx, 0px), -10px, 120px) rotateX(var(--rx, 0deg)) rotateY(var(--ry, 0deg));
+  /* Hover choreography — driven by fixed hit zones so the moving card never escapes the cursor */
+  .card { pointer-events: none; }
+  .stage.is-dev .card, .stage.is-design .card { filter: brightness(.55) saturate(.8); }
+  .stage.is-dev .card-dev, .stage.is-design .card-design {
+    filter: none; z-index: 3;
+    transform: translate3d(var(--hx), -10px, 120px) rotateX(var(--rx, 0deg)) rotateY(var(--ry, 0deg));
     box-shadow: 0 60px 120px -20px rgba(0,0,0,.9), 0 0 120px rgba(111,176,255,.55);
   }
   .card-dev { --hx: -70px; }
   .card-design { --hx: 70px; }
-  .stage:hover .card-dev:not(:hover) { transform: translate3d(-170px, 20px, -120px) rotateX(18deg) rotateY(36deg) rotateZ(-18deg); }
-  .stage:hover .card-design:not(:hover) { transform: translate3d(170px, -20px, -120px) rotateX(18deg) rotateY(-30deg) rotateZ(12deg); }
-  .card:hover::before { opacity: 1; }
+  .stage.is-design .card-dev { transform: translate3d(-170px, 20px, -120px) rotateX(18deg) rotateY(36deg) rotateZ(-18deg); }
+  .stage.is-dev .card-design { transform: translate3d(170px, -20px, -120px) rotateX(18deg) rotateY(-30deg) rotateZ(12deg); }
+  .stage.is-dev .card-dev::before, .stage.is-design .card-design::before { opacity: 1; }
+  .stage.is-dev .card-dev .go span, .stage.is-design .card-design .go span { transform: translateX(6px); }
 
-  .floaty { animation: floaty 7s ease-in-out infinite; transform-style: preserve-3d; position: absolute; inset: 0; }
+  .hit { position: absolute; top: 0; bottom: 0; width: 50%; z-index: 5; border-radius: 22px; }
+  .hit-dev { left: 0; } .hit-design { right: 0; }
+  .hit:focus-visible { outline: 2px solid var(--blue-soft); outline-offset: 4px; }
+
+  .floaty { animation: floaty 7s ease-in-out infinite; transform-style: preserve-3d; position: absolute; inset: 0; pointer-events: none; }
   @keyframes floaty { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-14px); } }
-  .stage:hover .floaty { animation-play-state: paused; }
+  .stage.is-dev .floaty, .stage.is-design .floaty { animation-play-state: paused; }
+
+  /* Site previews that fade in behind the hero on hover */
+  .preview {
+    position: absolute; inset: 0; z-index: 0; pointer-events: none;
+    background-size: cover; background-position: top center;
+    opacity: 0; transform: scale(1.06); filter: blur(2px);
+    transition: opacity .7s ease, transform 1.2s cubic-bezier(.2,.8,.2,1), filter .7s;
+  }
+  .preview::after { /* keep text and cards legible over the screenshot */
+    content: ""; position: absolute; inset: 0;
+    background: radial-gradient(70% 60% at 50% 55%, rgba(3,6,13,.25), rgba(3,6,13,.85)), linear-gradient(180deg, rgba(3,6,13,.4), rgba(3,6,13,.7));
+  }
+  .preview-dev { background-image: url("assets/dev-hero.png"); }
+  .preview-design { background-image: url("assets/design-hero.png"); }
+  .hero.show-dev .preview-dev, .hero.show-design .preview-design { opacity: 1; transform: scale(1); filter: none; }
+  .hero.show-dev .hero-title, .hero.show-design .hero-title { opacity: .25; }
+  .hero-title { transition: opacity .6s; z-index: 1; }
+  .hero-left, .hero-right { z-index: 2; }
 
   .glow-floor {
     position: absolute; left: 50%; bottom: -10px; width: 520px; height: 90px; margin-left: -260px;
@@ -236,28 +259,32 @@
   </div>
 </nav>
 
-<section class="hero">
+<section class="hero" id="hero">
+  <div class="preview preview-dev" aria-hidden="true"></div>
+  <div class="preview preview-design" aria-hidden="true"></div>
   <h1 class="hero-title">Charles Toriola</h1>
 
   <div class="stage" id="stage">
     <div class="glow-floor"></div>
+    <a class="hit hit-dev" data-site="dev" href="https://dev.charlestoriola.com" aria-label="Development work — dev.charlestoriola.com"></a>
+    <a class="hit hit-design" data-site="design" href="https://design.charlestoriola.com" aria-label="Design work — design.charlestoriola.com"></a>
     <div class="floaty">
-      <a class="card card-dev" href="https://dev.charlestoriola.com" aria-label="Development work — dev.charlestoriola.com">
+      <div class="card card-dev">
         <div class="card-top"><span class="card-tag">01 / Build</span><span class="card-chip"></span></div>
         <div>
           <h2>Dev</h2>
           <div class="domain">dev.charlestoriola.com</div>
         </div>
         <span class="go">Enter <span>→</span></span>
-      </a>
-      <a class="card card-design" href="https://design.charlestoriola.com" aria-label="Design work — design.charlestoriola.com">
+      </div>
+      <div class="card card-design">
         <div class="card-top"><span class="card-tag">02 / Craft</span><span class="card-chip"></span></div>
         <div>
           <h2>Design</h2>
           <div class="domain">design.charlestoriola.com</div>
         </div>
         <span class="go">Enter <span>→</span></span>
-      </a>
+      </div>
     </div>
   </div>
 
@@ -311,10 +338,22 @@
 <script>
   document.getElementById('yr').textContent = new Date().getFullYear();
 
-  // Cursor-driven tilt + sheen on the hovered card
-  document.querySelectorAll('.card').forEach(card => {
-    card.addEventListener('mousemove', e => {
-      const r = card.getBoundingClientRect();
+  // Hover/focus on a hit zone activates its card, tilts it, and shows that site's hero behind
+  const stage = document.getElementById('stage');
+  const hero = document.getElementById('hero');
+  const activate = site => {
+    stage.classList.remove('is-dev', 'is-design');
+    hero.classList.remove('show-dev', 'show-design');
+    if (site) { stage.classList.add('is-' + site); hero.classList.add('show-' + site); }
+  };
+  document.querySelectorAll('.hit').forEach(hit => {
+    const site = hit.dataset.site;
+    const card = document.querySelector('.card-' + site);
+    hit.addEventListener('mouseenter', () => activate(site));
+    hit.addEventListener('focus', () => activate(site));
+    hit.addEventListener('blur', () => activate(null));
+    hit.addEventListener('mousemove', e => {
+      const r = hit.getBoundingClientRect();
       const x = (e.clientX - r.left) / r.width;
       const y = (e.clientY - r.top) / r.height;
       card.style.setProperty('--ry', ((x - .5) * 24).toFixed(2) + 'deg');
@@ -322,10 +361,11 @@
       card.style.setProperty('--mx', (x * 100) + '%');
       card.style.setProperty('--my', (y * 100) + '%');
     });
-    card.addEventListener('mouseleave', () => {
+    hit.addEventListener('mouseleave', () => {
       ['--rx', '--ry', '--mx', '--my'].forEach(p => card.style.removeProperty(p));
     });
   });
+  stage.addEventListener('mouseleave', () => activate(null));
 
   // Starfield
   const stars = document.getElementById('stars');
