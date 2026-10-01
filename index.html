@@ -3,9 +3,83 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Charles Toriola</title>
-<meta name="description" content="Charles Toriola writes the code and designs what it looks like. Pick a door: dev or design.">
+<title>Charles Toriola | Full Stack Developer &amp; Creative Designer in Abuja, Nigeria</title>
+<meta name="description" content="Charles Toriola is a full stack developer and creative lead in Abuja, Nigeria. PHP, Python and React apps, plus branding, video, motion graphics and live production.">
+<meta name="author" content="Charles Toriola">
+<meta name="robots" content="index, follow, max-image-preview:large">
+<link rel="canonical" href="https://charlestoriola.com/">
+<meta name="theme-color" content="#03060d">
+<meta name="color-scheme" content="dark">
+
+<link rel="icon" href="/favicon.ico" sizes="any">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<link rel="manifest" href="/site.webmanifest">
+
+<meta property="og:type" content="profile">
+<meta property="og:site_name" content="Charles Toriola">
+<meta property="og:title" content="Charles Toriola | 10x Developer. 10x Designer.">
+<meta property="og:description" content="Full stack developer and creative lead in Abuja, Nigeria. Pick a side: the code or the craft.">
+<meta property="og:url" content="https://charlestoriola.com/">
+<meta property="og:image" content="https://charlestoriola.com/assets/og.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Charles Toriola: Developer and Designer cards">
+<meta property="og:locale" content="en_NG">
+<meta property="profile:first_name" content="Charles">
+<meta property="profile:last_name" content="Toriola">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Charles Toriola | 10x Developer. 10x Designer.">
+<meta name="twitter:description" content="Full stack developer and creative lead in Abuja, Nigeria. Pick a side: the code or the craft.">
+<meta name="twitter:image" content="https://charlestoriola.com/assets/og.jpg">
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "WebSite",
+      "@id": "https://charlestoriola.com/#website",
+      "url": "https://charlestoriola.com/",
+      "name": "Charles Toriola",
+      "publisher": { "@id": "https://charlestoriola.com/#person" }
+    },
+    {
+      "@type": "ProfilePage",
+      "@id": "https://charlestoriola.com/#profile",
+      "url": "https://charlestoriola.com/",
+      "name": "Charles Toriola | Full Stack Developer & Creative Designer",
+      "isPartOf": { "@id": "https://charlestoriola.com/#website" },
+      "mainEntity": { "@id": "https://charlestoriola.com/#person" },
+      "primaryImageOfPage": "https://charlestoriola.com/assets/charles.jpg",
+      "dateModified": "2026-10-01"
+    },
+    {
+      "@type": "Person",
+      "@id": "https://charlestoriola.com/#person",
+      "name": "Charles Toriola",
+      "givenName": "Charles",
+      "familyName": "Toriola",
+      "url": "https://charlestoriola.com/",
+      "image": "https://charlestoriola.com/assets/charles.jpg",
+      "email": "mailto:toriola333@gmail.com",
+      "jobTitle": ["Full Stack Developer", "Creative Lead"],
+      "worksFor": { "@type": "Organization", "name": "PrimeTEK Group" },
+      "alumniOf": { "@type": "CollegeOrUniversity", "name": "Nile University of Nigeria" },
+      "address": { "@type": "PostalAddress", "addressLocality": "Abuja", "addressCountry": "NG" },
+      "knowsAbout": ["PHP", "Python", "JavaScript", "Laravel", "Flask", "React", "Node.js", "Three.js", "Brand identity", "Graphic design", "Videography", "Motion graphics", "Live production", "Presentation design"],
+      "sameAs": [
+        "https://dev.charlestoriola.com",
+        "https://design.charlestoriola.com",
+        "https://github.com/ctoriola",
+        "https://www.linkedin.com/in/charles-toriola-36b64b283"
+      ]
+    }
+  ]
+}
+</script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
   :root {
@@ -59,7 +133,8 @@
     font-size: clamp(56px, 13vw, 200px); font-weight: 500; letter-spacing: -.045em; line-height: .95;
     pointer-events: none; user-select: none; white-space: nowrap;
   }
-  .hero-title > span { grid-area: 1 / 1; }
+  .hero-title > span, .hero-title::before, .hero-title::after { grid-area: 1 / 1; content: attr(data-text); }
+  .hero-title::before { z-index: -1; }
   .ht-text { /* the word itself: deep gradient + a slow light sweep */
     background:
       linear-gradient(100deg, transparent 42%, rgba(190,222,255,.5) 50%, transparent 58%),
@@ -70,10 +145,10 @@
     animation: sheen 9s cubic-bezier(.6,0,.4,1) infinite;
   }
   @keyframes sheen { 0%, 35% { background-position: 150% 0, 0 0; } 75%, 100% { background-position: -50% 0, 0 0; } }
-  .ht-echo { /* crisp hairline edge so the dark letters read against the glow */
+  .hero-title::before { /* crisp hairline edge so the dark letters read against the glow */
     color: transparent; -webkit-text-stroke: 1px rgba(150,200,255,.28);
   }
-  .ht-spot { /* bright copy revealed only under a moving spotlight */
+  .hero-title::after { /* bright copy revealed only under a moving spotlight */
     background: linear-gradient(180deg, #ffffff 0%, #a9d0ff 45%, #3d82e0 100%);
     -webkit-background-clip: text; background-clip: text; color: transparent;
     -webkit-mask-image: radial-gradient(clamp(140px, 18vw, 280px) circle at var(--tx, 50%) var(--ty, 50%), #000 0%, rgba(0,0,0,.35) 45%, transparent 75%);
@@ -418,11 +493,7 @@
   <div class="preview preview-dev" aria-hidden="true"></div>
   <div class="preview preview-design" aria-hidden="true"></div>
   <div class="ht-meta" aria-hidden="true"><span>Abuja, NG</span><span>Code / Creative</span></div>
-  <h1 class="hero-title" id="heroTitle" aria-label="Charles Toriola">
-    <span class="ht-echo" aria-hidden="true">Charles Toriola</span>
-    <span class="ht-text" aria-hidden="true">Charles Toriola</span>
-    <span class="ht-spot" aria-hidden="true">Charles Toriola</span>
-  </h1>
+  <h1 class="hero-title" id="heroTitle" data-text="Charles Toriola"><span class="ht-text">Charles Toriola</span></h1>
 
   <div class="stage" id="stage">
     <div class="glow-floor"></div>
@@ -480,7 +551,7 @@
 
 <section class="about" id="about">
   <figure class="portrait reveal">
-    <div class="img"><img src="assets/charles.jpg" alt="Charles Toriola in a black kaftan, checking his phone in a garden in Abuja" loading="lazy"></div>
+    <div class="img"><img src="assets/charles.jpg" width="1100" height="1101" alt="Charles Toriola, developer and designer, in a black kaftan, checking his phone in a garden in Abuja" loading="lazy"></div>
     <figcaption><span>Charles Toriola</span><span>Abuja, 2026</span></figcaption>
   </figure>
   <div class="statement reveal">
@@ -503,11 +574,11 @@
 
     <div class="work-head reveal"><h3><span class="n">02</span>Creative</h3><a href="https://design.charlestoriola.com">Full gallery ↗</a></div>
     <div class="posters">
-      <a class="poster" href="https://design.charlestoriola.com"><div class="ph"><img src="assets/work/poster-1.jpg" alt="Limitless typographic poster" loading="lazy"></div><p>Limitless<span>Typographic poster</span></p></a>
-      <a class="poster" href="https://design.charlestoriola.com"><div class="ph"><img src="assets/work/poster-2.jpg" alt="Eid al-Maulud Mubarak poster" loading="lazy"></div><p>Eid al-Maulud<span>PrimeTEK Group</span></p></a>
-      <a class="poster" href="https://design.charlestoriola.com"><div class="ph"><img src="assets/work/poster-3.jpg" alt="Independence Day poster" loading="lazy"></div><p>Independence Day<span>El-Panthomath Park</span></p></a>
-      <a class="poster" href="https://design.charlestoriola.com"><div class="ph"><img src="assets/work/poster-4.jpg" alt="Eid al-Adha poster" loading="lazy"></div><p>Eid Mubarak<span>Campaign poster</span></p></a>
-      <a class="poster" href="https://design.charlestoriola.com"><div class="ph"><img src="assets/work/poster-5.jpg" alt="Speak Up poster against hate speech" loading="lazy"></div><p>Speak Up<span>Granny Murray Schools</span></p></a>
+      <a class="poster" href="https://design.charlestoriola.com"><div class="ph"><img width="720" height="1018" src="assets/work/poster-1.jpg" alt="Limitless typographic poster" loading="lazy"></div><p>Limitless<span>Typographic poster</span></p></a>
+      <a class="poster" href="https://design.charlestoriola.com"><div class="ph"><img width="720" height="1080" src="assets/work/poster-2.jpg" alt="Eid al-Maulud Mubarak poster" loading="lazy"></div><p>Eid al-Maulud<span>PrimeTEK Group</span></p></a>
+      <a class="poster" href="https://design.charlestoriola.com"><div class="ph"><img width="720" height="1080" src="assets/work/poster-3.jpg" alt="Independence Day poster" loading="lazy"></div><p>Independence Day<span>El-Panthomath Park</span></p></a>
+      <a class="poster" href="https://design.charlestoriola.com"><div class="ph"><img width="720" height="1080" src="assets/work/poster-4.jpg" alt="Eid al-Adha poster" loading="lazy"></div><p>Eid Mubarak<span>Campaign poster</span></p></a>
+      <a class="poster" href="https://design.charlestoriola.com"><div class="ph"><img width="720" height="900" src="assets/work/poster-5.jpg" alt="Speak Up poster against hate speech" loading="lazy"></div><p>Speak Up<span>Granny Murray Schools</span></p></a>
     </div>
     <div class="also reveal">
       <div><h4>Two group rebrands</h4><p>Logos, brochures, decks and ID cards across PrimeTEK’s companies. Brochure turnaround went from weeks to days.</p></div>
