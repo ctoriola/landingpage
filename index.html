@@ -94,10 +94,11 @@
   }
   .ht-meta span::before { content: "+"; margin-right: 10px; color: rgba(160,200,255,.7); }
   .hero-left {
-    position: absolute; left: clamp(16px, 5vw, 64px); bottom: 90px; max-width: 260px;
+    position: absolute; left: clamp(16px, 5vw, 64px); bottom: 70px; max-width: 300px;
     font-size: 13px; line-height: 1.6; color: var(--muted);
   }
-  .hero-left p { margin-bottom: 22px; }
+  .hero-left p { margin-bottom: 14px; }
+  .hero-left p:last-of-type { margin-bottom: 24px; }
   .hero-left em { font-style: normal; color: var(--ink); }
   .start .arrow { animation: nudge-up 2.4s ease-in-out infinite; }
   @keyframes nudge-up { 0%, 60%, 100% { transform: translateY(0); } 30% { transform: translateY(-4px); } }
@@ -279,7 +280,7 @@
   .frame .cross { position: absolute; width: 7px; height: 7px; background: #fff; border-radius: 50%; box-shadow: 0 0 10px #9cc8ff; }
   .create h2 { font-size: clamp(40px, 7.4vw, 92px); font-weight: 400; letter-spacing: -.045em; line-height: 1.02; }
   .create h2 .dim { color: #4f6080; }
-  .rotator { display: inline-grid; vertical-align: bottom; text-align: left; }
+  .rotator { display: grid; justify-items: center; text-align: center; }
   .rotator span {
     grid-area: 1 / 1; opacity: 0; transform: translateY(.5em); filter: blur(6px);
     transition: opacity .6s, transform .6s cubic-bezier(.2,.8,.2,1), filter .6s;
@@ -437,7 +438,8 @@
   </div>
 
   <div class="hero-left">
-    <p>I write the code <em>and</em> I design what it looks like, so nothing gets lost in the handoff. Pick a door.</p>
+    <p>I don’t just build what works. <em>I shape what people see, feel, and interact with.</em></p>
+    <p>From the backend logic to the final frame, I work across code and creative, which means the idea doesn’t get diluted somewhere between design and development.</p>
     <a class="pill start" href="#stage" id="startBtn">Start <span class="arrow">↑</span></a>
   </div>
 
@@ -516,7 +518,6 @@
     <div class="bigname" aria-hidden="true">Charles Toriola</div>
     <footer>
       <span>© <span id="yr"></span> Charles Toriola</span>
-      <span class="mono">Abuja, Nigeria · Everywhere online</span>
       <span>charlestoriola.com</span>
     </footer>
   </div>
