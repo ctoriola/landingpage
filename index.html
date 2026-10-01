@@ -166,19 +166,18 @@
 
   /* Site previews that fade in behind the hero on hover */
   .preview {
-    position: absolute; inset: 0; z-index: 0; pointer-events: none;
+    position: absolute; inset: 0; z-index: 3; pointer-events: none;
     background-size: cover; background-position: top center;
     opacity: 0; transform: scale(1.06); filter: blur(2px);
     transition: opacity .7s ease, transform 1.2s cubic-bezier(.2,.8,.2,1), filter .7s;
   }
-  .preview::after { /* keep text and cards legible over the screenshot */
-    content: ""; position: absolute; inset: 0;
-    background: radial-gradient(70% 60% at 50% 55%, rgba(3,6,13,.35), rgba(3,6,13,.75)), linear-gradient(180deg, rgba(3,6,13,.25), rgba(3,6,13,.55));
-  }
   .preview-dev { background-image: url("assets/dev-hero.jpg"); }
   .preview-design { background-image: url("assets/design-hero.jpg"); }
   .hero.show-dev .preview-dev, .hero.show-design .preview-design { opacity: 1; transform: scale(1); filter: none; }
-  .hero.show-dev .hero-title, .hero.show-design .hero-title { opacity: .25; }
+  /* the preview fully covers the original hero; only the cards stay on top */
+  .stage { z-index: 4; }
+  nav { transition: opacity .5s; }
+  body.previewing nav { opacity: 0; pointer-events: none; }
   .hero-title { transition: opacity .6s; z-index: 1; }
   .hero-left, .hero-right { z-index: 2; }
 
@@ -344,6 +343,7 @@
   const activate = site => {
     stage.classList.remove('is-dev', 'is-design');
     hero.classList.remove('show-dev', 'show-design');
+    document.body.classList.toggle('previewing', !!site);
     if (site) { stage.classList.add('is-' + site); hero.classList.add('show-' + site); }
   };
   document.querySelectorAll('.hit').forEach(hit => {
