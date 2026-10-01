@@ -6,7 +6,7 @@
 <title>Charles Toriola</title>
 <meta name="description" content="Charles Toriola writes the code and designs what it looks like. Pick a door: dev or design.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
   :root {
     --bg: #03060d;
@@ -23,7 +23,7 @@
   body {
     background: var(--bg);
     color: var(--ink);
-    font-family: "Inter", system-ui, sans-serif;
+    font-family: "Inter Tight", "Inter", system-ui, sans-serif;
     font-weight: 300;
     -webkit-font-smoothing: antialiased;
     overflow-x: hidden;
@@ -89,7 +89,7 @@
   .ht-meta {
     position: absolute; top: 72px; left: 0; right: 0; z-index: 1;
     display: flex; justify-content: space-between; padding: 0 clamp(16px, 7vw, 120px);
-    font: 500 10px/1 ui-monospace, "SF Mono", Menlo, monospace; letter-spacing: .22em; text-transform: uppercase;
+    font: 500 10px/1 "JetBrains Mono", "JetBrains Mono", ui-monospace, Menlo, monospace; letter-spacing: .22em; text-transform: uppercase;
     color: rgba(140,180,255,.45); pointer-events: none;
   }
   .ht-meta span::before { content: "+"; margin-right: 10px; color: rgba(160,200,255,.7); }
@@ -254,8 +254,8 @@
   /* ---------- Shared ---------- */
   .reveal { opacity: 0; transform: translateY(28px); transition: opacity 1s ease, transform 1s cubic-bezier(.2,.8,.2,1); }
   .reveal.in { opacity: 1; transform: none; }
-  .mono { font-family: ui-monospace, "SF Mono", Menlo, monospace; }
-  .eyebrow { font: 500 11px/1 ui-monospace, "SF Mono", Menlo, monospace; color: var(--muted); letter-spacing: .24em; text-transform: uppercase; margin-bottom: 28px; }
+  .mono { font-family: "JetBrains Mono", "JetBrains Mono", ui-monospace, Menlo, monospace; }
+  .eyebrow { font: 500 11px/1 "JetBrains Mono", "JetBrains Mono", ui-monospace, Menlo, monospace; color: var(--muted); letter-spacing: .24em; text-transform: uppercase; margin-bottom: 28px; }
   .glass {
     background: linear-gradient(160deg, rgba(255,255,255,.12), rgba(255,255,255,.03));
     border: 1px solid rgba(255,255,255,.14); border-radius: 22px;
@@ -295,77 +295,82 @@
   .float-pill.a { top: -26px; right: 0; }
   .float-pill.b { bottom: -26px; left: 0; }
 
-  /* ---------- Proof section (blue panel) ---------- */
-  .proof {
-    position: relative; overflow: hidden;
-    padding: 150px clamp(16px, 5vw, 64px);
-    background:
-      radial-gradient(60% 70% at 75% 10%, rgba(140,195,255,.55), transparent 60%),
-      radial-gradient(70% 80% at 20% 100%, rgba(16,60,130,.9), transparent 70%),
-      linear-gradient(160deg, #0d3a7a 0%, #0a2a5c 45%, #04122b 100%);
+  /* ---------- Portrait + statement ---------- */
+  .about {
+    position: relative; background: var(--bg);
+    display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 6fr); align-items: end;
+    gap: clamp(28px, 5vw, 80px); padding: 140px clamp(16px, 5vw, 64px) 120px; max-width: 1320px; margin: 0 auto;
   }
-  .proof .ring { position: absolute; border: 1px solid rgba(255,255,255,.14); border-radius: 50%; pointer-events: none; }
-  .proof .ring.r1 { width: 520px; height: 520px; left: -120px; top: -140px; }
-  .proof .ring.r2 { width: 900px; height: 900px; right: -380px; bottom: -520px; border-color: rgba(255,255,255,.08); }
-  .proof .gridline { position: absolute; background: rgba(255,255,255,.1); }
-  .proof-inner { position: relative; max-width: 1180px; margin: 0 auto; }
-  .proof h2 {
-    font-size: clamp(48px, 9vw, 132px); font-weight: 400; letter-spacing: -.05em; line-height: .95;
-    background: linear-gradient(180deg, #ffffff 30%, rgba(200,225,255,.75)); -webkit-background-clip: text; background-clip: text; color: transparent;
+  .portrait { position: relative; margin: 0; }
+  .portrait .img {
+    position: relative; aspect-ratio: 4 / 5; overflow: hidden; border-radius: 6px;
   }
-  .proof h2 .in2 { display: block; padding-left: clamp(40px, 16vw, 260px); }
-  .proof .sub { max-width: 340px; color: rgba(225,238,255,.75); font-size: 15px; line-height: 1.7; margin: 34px 0 0 clamp(40px, 16vw, 260px); }
-  .stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; margin-top: 90px; }
-  .stat-card { padding: 26px; min-height: 250px; display: flex; flex-direction: column; justify-content: space-between; position: relative; overflow: hidden; transition: transform .5s cubic-bezier(.2,.8,.2,1); }
-  .stat-card:hover { transform: translateY(-6px); }
-  .stat-card .head { display: flex; align-items: center; gap: 12px; font-size: 14px; }
-  .stat-card .head .tag { margin-left: auto; font: 500 10px/1 ui-monospace, Menlo, monospace; letter-spacing: .16em; text-transform: uppercase; opacity: .6; }
-  .stat-card svg { width: 100%; height: 80px; overflow: visible; }
-  .stat-card svg path { fill: none; stroke: #d9f27a; stroke-width: 2; stroke-linecap: round; stroke-dasharray: 600; stroke-dashoffset: 600; transition: stroke-dashoffset 2.2s cubic-bezier(.6,0,.2,1) .3s; }
-  .stat-card.in svg path, .reveal.in .stat-card svg path { stroke-dashoffset: 0; }
-  .stat-card .num { font-size: clamp(54px, 6vw, 80px); font-weight: 400; letter-spacing: -.05em; line-height: 1; }
-  .stat-card .num sup { font-size: .4em; vertical-align: top; margin-left: 2px; color: #bfe0ff; }
-  .stat-card p { font-size: 13px; color: rgba(225,238,255,.72); line-height: 1.55; margin-top: 10px; max-width: 240px; }
-  .proof .ctas { display: flex; gap: 12px; flex-wrap: wrap; justify-content: flex-end; margin-top: 50px; }
+  .portrait img { width: 100%; height: 100%; object-fit: cover; object-position: 55% 20%; display: block;
+    filter: grayscale(1) contrast(1.15) brightness(.9); transition: filter 1.2s ease, transform 1.6s cubic-bezier(.2,.8,.2,1); }
+  .portrait .img::after { /* blue grade that lifts off on hover */
+    content: ""; position: absolute; inset: 0; mix-blend-mode: color; transition: opacity 1.2s ease;
+    background: linear-gradient(180deg, #2f7fe0, #0b2a55);
+  }
+  .portrait:hover img { filter: none; transform: scale(1.03); }
+  .portrait:hover .img::after { opacity: 0; }
+  .portrait figcaption { margin-top: 14px; display: flex; justify-content: space-between; font: 400 11px/1.4 "JetBrains Mono", ui-monospace, Menlo, monospace; color: var(--muted); letter-spacing: .04em; }
+  .statement h2 { font-size: clamp(44px, 6.2vw, 100px); white-space: nowrap; font-weight: 600; letter-spacing: -.055em; line-height: .88; }
+  .statement h2 .x { font-weight: 300; color: var(--blue-soft); letter-spacing: -.02em; }
+  .statement h2 .l2 { display: block; color: transparent; -webkit-text-stroke: 1.5px rgba(200,225,255,.85); }
+  .statement .bio { margin-top: 44px; max-width: 520px; font-size: 18px; line-height: 1.65; color: #b4c2da; }
+  .statement .bio + .bio { margin-top: 16px; font-size: 15px; color: var(--muted); }
+  .statement .bio b { color: var(--ink); font-weight: 500; }
 
-  /* ---------- Marquee ---------- */
-  .marquee { background: var(--bg); padding: 70px 0; overflow: hidden; border-bottom: 1px solid rgba(140,180,255,.08); }
-  .marquee .row { display: flex; width: max-content; gap: 0; animation: slide 46s linear infinite; }
-  .marquee .row.rev { animation-direction: reverse; animation-duration: 54s; margin-top: 10px; }
-  .marquee:hover .row { animation-play-state: paused; }
-  .marquee .row span { font-size: clamp(42px, 6.5vw, 96px); font-weight: 400; letter-spacing: -.04em; padding: 0 .35em; white-space: nowrap; line-height: 1.15; }
-  .marquee .row span.o { color: transparent; -webkit-text-stroke: 1px rgba(140,190,255,.38); }
-  .marquee .row span.f { background: linear-gradient(180deg, #fff, #7fb4ff); -webkit-background-clip: text; background-clip: text; color: transparent; }
-  .marquee .row i { font-style: normal; color: var(--blue); align-self: center; font-size: clamp(20px, 2.4vw, 34px); }
-  @keyframes slide { to { transform: translateX(-50%); } }
+  /* ---------- Work ---------- */
+  .work { background: var(--bg); padding: 60px clamp(16px, 5vw, 64px) 140px; }
+  .work-inner { max-width: 1320px; margin: 0 auto; }
+  .work-head { display: flex; align-items: baseline; justify-content: space-between; gap: 20px; border-bottom: 1px solid var(--line); padding-bottom: 18px; margin-bottom: 8px; }
+  .work-head h3 { font-size: clamp(28px, 3.4vw, 44px); font-weight: 500; letter-spacing: -.03em; }
+  .work-head a { font-size: 14px; color: var(--muted); border-bottom: 1px solid currentColor; padding-bottom: 2px; }
+  .work-head a:hover { color: var(--ink); }
+  .work-head .n { font: 400 12px "JetBrains Mono", ui-monospace, Menlo, monospace; color: var(--muted); margin-right: 14px; }
+  .rows { list-style: none; margin-bottom: 120px; }
+  .rows a {
+    display: grid; grid-template-columns: 56px minmax(0, 1.1fr) minmax(0, 1.6fr) auto; gap: 24px; align-items: baseline;
+    padding: 26px 0; border-bottom: 1px solid rgba(140,180,255,.1); transition: background .3s, padding .3s;
+  }
+  .rows a:hover { background: linear-gradient(90deg, rgba(47,127,224,.12), transparent 70%); padding-left: 12px; }
+  .rows .idx { font: 400 12px "JetBrains Mono", ui-monospace, Menlo, monospace; color: var(--muted); }
+  .rows .name { font-size: clamp(24px, 2.6vw, 36px); font-weight: 500; letter-spacing: -.03em; }
+  .rows .name small { display: block; font: 400 11px/1.6 "JetBrains Mono", ui-monospace, Menlo, monospace; color: var(--blue-soft); letter-spacing: .06em; margin-top: 6px; }
+  .rows .desc { color: var(--muted); font-size: 15px; line-height: 1.6; }
+  .rows .go { font-size: 20px; color: var(--muted); transition: transform .3s, color .3s; }
+  .rows a:hover .go { transform: translate(4px, -4px); color: var(--ink); }
+  .posters { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 14px; margin-top: 26px; }
+  .poster { display: block; }
+  .poster .ph { overflow: hidden; border-radius: 4px; aspect-ratio: 4 / 5; background: #0a1324; }
+  .poster img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform .9s cubic-bezier(.2,.8,.2,1); }
+  .poster:hover img { transform: scale(1.05); }
+  .poster:nth-child(even) { margin-top: 48px; }
+  .poster p { margin-top: 12px; font-size: 13px; line-height: 1.4; }
+  .poster p span { display: block; font: 400 11px "JetBrains Mono", ui-monospace, Menlo, monospace; color: var(--muted); margin-top: 3px; }
+  .also { margin-top: 70px; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 30px; border-top: 1px solid var(--line); padding-top: 30px; }
+  .also h4 { font-size: 17px; font-weight: 500; margin-bottom: 8px; }
+  .also p { font-size: 14px; color: var(--muted); line-height: 1.6; }
 
   /* ---------- Contact ---------- */
-  .contact {
-    position: relative; overflow: hidden; text-align: center;
-    padding: 170px clamp(16px, 5vw, 64px) 40px;
-    background: radial-gradient(60% 55% at 50% 100%, rgba(47,127,224,.55), transparent 70%), linear-gradient(180deg, var(--bg) 0%, #071a3a 100%);
+  .contact { background: linear-gradient(180deg, var(--bg) 0%, #06142c 100%); padding: 140px clamp(16px, 5vw, 64px) 36px; }
+  .contact-inner { max-width: 1320px; margin: 0 auto; }
+  .contact .eyebrow { margin-bottom: 20px; }
+  .contact h3 { font-size: clamp(22px, 2.4vw, 30px); font-weight: 400; color: var(--muted); letter-spacing: -.01em; max-width: 620px; line-height: 1.35; }
+  .contact h3 b { color: var(--ink); font-weight: 400; }
+  .email {
+    display: inline-block; margin-top: 30px; font-size: clamp(34px, 7.4vw, 112px); font-weight: 600; letter-spacing: -.05em; line-height: 1;
+    background: linear-gradient(90deg, #fff 0%, #fff 50%, #6fb0ff 50%, #6fb0ff 100%); background-size: 200% 100%; background-position: 0 0;
+    -webkit-background-clip: text; background-clip: text; color: transparent; transition: background-position .7s cubic-bezier(.6,0,.2,1);
+    word-break: break-all;
   }
-  .orb {
-    position: absolute; left: 50%; top: 120px; width: 520px; height: 520px; margin-left: -260px; border-radius: 50%; pointer-events: none;
-    background: radial-gradient(circle at 35% 30%, rgba(200,228,255,.55), rgba(47,127,224,.25) 40%, transparent 70%);
-    filter: blur(30px); opacity: .55; animation: breathe 8s ease-in-out infinite;
-  }
-  @keyframes breathe { 50% { transform: scale(1.12); opacity: .75; } }
-  .contact-inner { position: relative; max-width: 1100px; margin: 0 auto; }
-  .contact h3 { font-size: clamp(44px, 8vw, 116px); font-weight: 400; letter-spacing: -.05em; line-height: .98; }
-  .contact h3 .dim { color: #5c7099; }
-  .contact .sub { color: var(--muted); max-width: 440px; margin: 28px auto 0; font-size: 16px; line-height: 1.7; }
-  .contact-links { display: flex; flex-wrap: wrap; justify-content: center; gap: 14px; margin-top: 56px; }
-  .contact-links a { padding: 14px 14px 14px 26px; font-size: 15px; gap: 18px; }
-  .contact-links a small { font: 500 10px/1 ui-monospace, Menlo, monospace; letter-spacing: .18em; text-transform: uppercase; color: var(--muted); margin-right: -6px; }
-  .contact-links a .arrow { transition: transform .35s; }
-  .contact-links a:hover .arrow { transform: rotate(45deg); }
-  .bigname {
-    margin-top: 130px; font-size: clamp(44px, 10.6vw, 170px); font-weight: 500; letter-spacing: -.06em; line-height: .8;
-    background: linear-gradient(180deg, rgba(140,190,255,.35), rgba(140,190,255,0) 85%); -webkit-background-clip: text; background-clip: text; color: transparent;
-    user-select: none; white-space: nowrap;
-  }
-  footer { max-width: 1180px; margin: 30px auto 0; padding-top: 22px; border-top: 1px solid var(--line); display: flex; justify-content: space-between; gap: 16px; font-size: 12px; color: var(--muted); }
+  .email:hover { background-position: -100% 0; }
+  .contact-meta { margin-top: 60px; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 24px; border-top: 1px solid var(--line); padding-top: 26px; }
+  .contact-meta div small { display: block; font: 400 11px "JetBrains Mono", ui-monospace, Menlo, monospace; color: var(--muted); letter-spacing: .1em; text-transform: uppercase; margin-bottom: 8px; }
+  .contact-meta a { font-size: 16px; border-bottom: 1px solid transparent; transition: border-color .3s; }
+  .contact-meta a:hover { border-color: currentColor; }
+  footer { max-width: 1320px; margin: 110px auto 0; display: flex; justify-content: space-between; gap: 16px; font-size: 12px; color: var(--muted); }
 
   /* ---------- Responsive ---------- */
   @media (max-width: 860px) {
@@ -376,9 +381,15 @@
     .hero-left { position: static; text-align: center; max-width: 360px; margin: 20px auto 0; order: 4; }
     .stage { height: 400px; transform: scale(.82); margin-top: 20px; }
     .float-pill { display: none; }
-    .stats { grid-template-columns: 1fr; }
-    .proof h2 .in2, .proof .sub { padding-left: 0; margin-left: 0; }
-    .proof .ctas { justify-content: flex-start; }
+    .about { grid-template-columns: 1fr; padding-top: 100px; }
+    .statement h2 { font-size: 10.4vw; }
+    .email { font-size: 8.6vw; word-break: normal; }
+    .rows a { grid-template-columns: 34px 1fr auto; }
+    .rows .desc { grid-column: 2 / 4; }
+    .rows .go { grid-row: 1; grid-column: 3; }
+    .posters { grid-template-columns: repeat(5, 62%); overflow-x: auto; scroll-snap-type: x mandatory; margin-right: -16px; padding-right: 16px; }
+    .poster { scroll-snap-align: start; } .poster:nth-child(even) { margin-top: 0; }
+    .also, .contact-meta { grid-template-columns: 1fr 1fr; }
     .ht-meta { display: none; }
     .hero-title { font-size: 11.6vw; }
     footer { flex-direction: column; align-items: center; }
@@ -398,6 +409,7 @@
   <div class="links">
     <a href="https://dev.charlestoriola.com">Dev</a>
     <a href="https://design.charlestoriola.com">Design</a>
+    <a href="#work">Work</a>
     <a href="#contact">Contact</a>
   </div>
 </nav>
@@ -405,7 +417,7 @@
 <section class="hero" id="hero">
   <div class="preview preview-dev" aria-hidden="true"></div>
   <div class="preview preview-design" aria-hidden="true"></div>
-  <div class="ht-meta" aria-hidden="true"><span>Portfolio index</span><span>Built &amp; designed by hand</span></div>
+  <div class="ht-meta" aria-hidden="true"><span>Abuja, NG</span><span>Code / Creative</span></div>
   <h1 class="hero-title" id="heroTitle" aria-label="Charles Toriola">
     <span class="ht-echo" aria-hidden="true">Charles Toriola</span>
     <span class="ht-text" aria-hidden="true">Charles Toriola</span>
@@ -462,60 +474,60 @@
     <h2>I love creating.<br><span class="dim">Lately it's</span>
       <span class="rotator" id="rotator"><span class="on">APIs.</span><span>brand systems.</span><span>motion.</span><span>dashboards.</span><span>livestreams.</span><span>pitch decks.</span></span>
     </h2>
-    <p class="lead">I've never been able to pick a lane, so I stopped trying. <strong>Code keeps my design honest. Design keeps my code human.</strong> Whatever I'm making, the screen it's on, the story behind it, and the system underneath all come from the same pair of hands.</p>
+    <p class="lead">I’ve never been able to pick a lane, so I stopped trying. Some weeks that means Flask routes and database schemas. Other weeks it’s <strong>colour-grading an event film at 2am</strong>. It all scratches the same itch.</p>
   </div>
 </section>
 
-<section class="proof" id="proof">
-  <span class="ring r1"></span><span class="ring r2"></span>
-  <span class="gridline" style="left:0;right:0;top:62%;height:1px"></span>
-  <span class="gridline" style="top:0;bottom:0;left:68%;width:1px"></span>
-  <div class="proof-inner">
-    <h2 class="reveal">Shipped,<span class="in2">not sketched.</span></h2>
-    <p class="sub reveal">Ideas are cheap. These are things that went out the door and are still running.</p>
-
-    <div class="stats reveal">
-      <div class="glass stat-card">
-        <div class="head"><span class="dot"></span>In production <span class="tag">Dev</span></div>
-        <svg viewBox="0 0 300 80" preserveAspectRatio="none"><path d="M0,70 C40,68 60,60 90,52 S140,30 170,34 S230,18 300,6"/></svg>
-        <div><div class="num" data-count="100">0<sup>+</sup></div><p>schools running management software I helped build.</p></div>
-      </div>
-      <div class="glass stat-card">
-        <div class="head"><span class="dot"></span>Built solo <span class="tag">Dev</span></div>
-        <svg viewBox="0 0 300 80" preserveAspectRatio="none"><path d="M0,66 C30,64 50,40 80,46 S120,70 150,50 S200,10 230,22 S270,30 300,12"/></svg>
-        <div><div class="num" data-count="40">0<sup>+</sup></div><p>decks generated on PitchPerfectAI, the AI pitch deck platform I built end to end.</p></div>
-      </div>
-      <div class="glass stat-card">
-        <div class="head"><span class="dot"></span>Creative lead <span class="tag">Design</span></div>
-        <svg viewBox="0 0 300 80" preserveAspectRatio="none"><path d="M0,60 C40,20 70,20 100,44 S150,74 180,40 S240,8 300,30"/></svg>
-        <div><div class="num" data-count="5">0</div><p>companies whose brands, video and livestreams I've directed.</p></div>
-      </div>
-    </div>
-
-    <div class="ctas reveal">
-      <a class="pill" href="https://dev.charlestoriola.com">See the code <span class="arrow">↗</span></a>
-      <a class="pill" href="https://design.charlestoriola.com">See the craft <span class="arrow">↗</span></a>
-    </div>
+<section class="about" id="about">
+  <figure class="portrait reveal">
+    <div class="img"><img src="assets/charles.jpg" alt="Charles Toriola in a black kaftan, checking his phone in a garden in Abuja" loading="lazy"></div>
+    <figcaption><span>Charles Toriola</span><span>Abuja, 2026</span></figcaption>
+  </figure>
+  <div class="statement reveal">
+    <div class="eyebrow">// Hi, I’m Charles</div>
+    <h2>10<span class="x">x</span> Developer.<span class="l2">10<span class="x">x</span> Designer.</span></h2>
+    <p class="bio">Computer Science grad, former PHP developer, now <b>Creative Lead at PrimeTEK Group</b>, running brand and production for five companies. I still ship software, and I still open After Effects on weekends.</p>
+    <p class="bio">I lead a two-person creative team, run twice-weekly livestreams on an ATEM switcher, and once delivered a full product catalogue in five hours.</p>
   </div>
 </section>
 
-<section class="marquee" aria-label="Tools and crafts">
-  <div class="row"><span class="f">PHP</span><i>✦</i><span class="o">Python</span><i>✦</i><span class="f">Laravel</span><i>✦</i><span class="o">Flask</span><i>✦</i><span class="f">React</span><i>✦</i><span class="o">Node.js</span><i>✦</i><span class="f">Three.js</span><i>✦</i><span class="f">PHP</span><i>✦</i><span class="o">Python</span><i>✦</i><span class="f">Laravel</span><i>✦</i><span class="o">Flask</span><i>✦</i><span class="f">React</span><i>✦</i><span class="o">Node.js</span><i>✦</i><span class="f">Three.js</span><i>✦</i></div>
-  <div class="row rev"><span class="o">Brand Identity</span><i>✦</i><span class="f">Videography</span><i>✦</i><span class="o">Motion Graphics</span><i>✦</i><span class="f">Live Production</span><i>✦</i><span class="o">Presentations</span><i>✦</i><span class="o">Brand Identity</span><i>✦</i><span class="f">Videography</span><i>✦</i><span class="o">Motion Graphics</span><i>✦</i><span class="f">Live Production</span><i>✦</i><span class="o">Presentations</span><i>✦</i></div>
+<section class="work" id="work">
+  <div class="work-inner">
+    <div class="work-head reveal"><h3><span class="n">01</span>Code</h3><a href="https://dev.charlestoriola.com/work.html">All projects ↗</a></div>
+    <ul class="rows">
+      <li><a href="https://dev.charlestoriola.com/pitchperfectai.html"><span class="idx">01</span><span class="name">PitchPerfectAI<small>Python · Flask · Gemini</small></span><span class="desc">Feed it a brief, documents or a GitHub repo; get back a 13-slide pitch deck. Built solo, end to end. 40+ decks generated so far.</span><span class="go">↗</span></a></li>
+      <li><a href="https://dev.charlestoriola.com/ncrypt.html"><span class="idx">02</span><span class="name">NCrypt<small>React · Web Crypto</small></span><span class="desc">File sharing where files are AES-GCM encrypted in your browser before they ever touch a server.</span><span class="go">↗</span></a></li>
+      <li><a href="https://dev.charlestoriola.com/orderly.html"><span class="idx">03</span><span class="name">Orderly<small>Flask · AWS</small></span><span class="desc">Scan a QR code, join the queue, stop standing in line. DynamoDB and S3 under the hood.</span><span class="go">↗</span></a></li>
+      <li><a href="https://dev.charlestoriola.com/work.html"><span class="idx">04</span><span class="name">School management<small>PHP · Wepluz</small></span><span class="desc">Running in 100+ schools, some with over 500 students. My first taste of software people depend on daily.</span><span class="go">↗</span></a></li>
+    </ul>
+
+    <div class="work-head reveal"><h3><span class="n">02</span>Creative</h3><a href="https://design.charlestoriola.com">Full gallery ↗</a></div>
+    <div class="posters">
+      <a class="poster" href="https://design.charlestoriola.com"><div class="ph"><img src="assets/work/poster-1.jpg" alt="Limitless typographic poster" loading="lazy"></div><p>Limitless<span>Typographic poster</span></p></a>
+      <a class="poster" href="https://design.charlestoriola.com"><div class="ph"><img src="assets/work/poster-2.jpg" alt="Eid al-Maulud Mubarak poster" loading="lazy"></div><p>Eid al-Maulud<span>PrimeTEK Group</span></p></a>
+      <a class="poster" href="https://design.charlestoriola.com"><div class="ph"><img src="assets/work/poster-3.jpg" alt="Independence Day poster" loading="lazy"></div><p>Independence Day<span>El-Panthomath Park</span></p></a>
+      <a class="poster" href="https://design.charlestoriola.com"><div class="ph"><img src="assets/work/poster-4.jpg" alt="Eid al-Adha poster" loading="lazy"></div><p>Eid Mubarak<span>Campaign poster</span></p></a>
+      <a class="poster" href="https://design.charlestoriola.com"><div class="ph"><img src="assets/work/poster-5.jpg" alt="Speak Up poster against hate speech" loading="lazy"></div><p>Speak Up<span>Granny Murray Schools</span></p></a>
+    </div>
+    <div class="also reveal">
+      <div><h4>Two group rebrands</h4><p>Logos, brochures, decks and ID cards across PrimeTEK’s companies. Brochure turnaround went from weeks to days.</p></div>
+      <div><h4>Event films</h4><p>Recaps for Granny Murray Schools that doubled engagement and lifted Instagram reach by up to 35%.</p></div>
+      <div><h4>Live production</h4><p>Two cameras, three screens, OBS and an ATEM, twice a week, for a community of about 500.</p></div>
+    </div>
+  </div>
 </section>
 
 <section class="contact" id="contact">
-  <div class="orb"></div>
   <div class="contact-inner">
-    <div class="eyebrow reveal">// Say hello</div>
-    <h3 class="reveal">Got something<br><span class="dim">worth</span> making?</h3>
-    <p class="sub reveal">A product that needs building, a brand that needs a face, or both at once. That last one's my favourite.</p>
-    <div class="contact-links reveal">
-      <a class="pill" href="mailto:hello@charlestoriola.com"><small>Email</small>hello@charlestoriola.com <span class="arrow">↗</span></a>
-      <a class="pill" href="https://github.com/ctoriola" target="_blank" rel="noopener"><small>GitHub</small>@ctoriola <span class="arrow">↗</span></a>
-      <a class="pill" href="https://www.linkedin.com/in/charlestoriola" target="_blank" rel="noopener"><small>LinkedIn</small>Charles Toriola <span class="arrow">↗</span></a>
+    <div class="eyebrow reveal">// Contact</div>
+    <h3 class="reveal">Building something, rebranding something, or both? <b>Email is the fastest way to reach me.</b></h3>
+    <a class="email reveal" href="mailto:toriola333@gmail.com">toriola333@gmail.com</a>
+    <div class="contact-meta reveal">
+      <div><small>Phone</small><a href="tel:+2348166295770">+234 816 629 5770</a></div>
+      <div><small>GitHub</small><a href="https://github.com/ctoriola" target="_blank" rel="noopener">@ctoriola</a></div>
+      <div><small>LinkedIn</small><a href="https://www.linkedin.com/in/charles-toriola-36b64b283" target="_blank" rel="noopener">Charles Toriola</a></div>
+      <div><small>Archive</small><a href="https://drive.google.com/drive/folders/1dR0bheCgAM76rYGLXpDpPbsf07zTeTqo?usp=share_link" target="_blank" rel="noopener">Google Drive</a></div>
     </div>
-    <div class="bigname" aria-hidden="true">Charles Toriola</div>
     <footer>
       <span>© <span id="yr"></span> Charles Toriola</span>
       <span>charlestoriola.com</span>
