@@ -51,7 +51,7 @@
       "name": "Charles Toriola | Full Stack Developer & Creative Designer",
       "isPartOf": { "@id": "https://charlestoriola.com/#website" },
       "mainEntity": { "@id": "https://charlestoriola.com/#person" },
-      "primaryImageOfPage": "https://charlestoriola.com/assets/charles.jpg",
+      "primaryImageOfPage": "https://charlestoriola.com/assets/charles.webp",
       "dateModified": "2026-10-01"
     },
     {
@@ -61,7 +61,7 @@
       "givenName": "Charles",
       "familyName": "Toriola",
       "url": "https://charlestoriola.com/",
-      "image": "https://charlestoriola.com/assets/charles.jpg",
+      "image": "https://charlestoriola.com/assets/charles.webp",
       "email": "mailto:toriola333@gmail.com",
       "jobTitle": ["Full Stack Developer", "Creative Lead"],
       "worksFor": { "@type": "Organization", "name": "PrimeTEK Group" },
@@ -78,10 +78,16 @@
   ]
 }
 </script>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="preload" href="/assets/fonts/inter-tight.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/assets/card-dev.webp" as="image" type="image/webp">
+<link rel="preload" href="/assets/card-design.webp" as="image" type="image/webp">
 <style>
+  @font-face { font-family: "Inter Tight"; font-style: normal; font-weight: 300 700; font-display: swap;
+    src: url("/assets/fonts/inter-tight.woff2") format("woff2");
+    unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD; }
+  @font-face { font-family: "JetBrains Mono"; font-style: normal; font-weight: 400 500; font-display: swap;
+    src: url("/assets/fonts/jetbrains-mono.woff2") format("woff2");
+    unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD; }
   :root {
     --bg: #03060d;
     --bg-2: #061020;
@@ -258,8 +264,8 @@
     content: ""; position: absolute; inset: 0; border-radius: inherit;
     background: linear-gradient(180deg, rgba(3,10,25,.55) 0%, rgba(3,10,25,.05) 30%, rgba(3,10,25,.15) 50%, rgba(5,20,50,.88) 100%);
   }
-  .card-dev .cover { background-image: url("assets/card-dev.jpg"); background-position: 50% 25%; }
-  .card-design .cover { background-image: url("assets/card-design.jpg"); background-position: 45% 30%; }
+  .card-dev .cover { background-image: url("assets/card-dev.webp"); background-position: 50% 25%; }
+  .card-design .cover { background-image: url("assets/card-design.webp"); background-position: 45% 30%; }
   .stage.is-dev .card-dev .cover, .stage.is-design .card-design .cover { transform: scale(1.06); }
   .card > *:not(.cover) { position: relative; z-index: 1; }
   .card { justify-content: flex-start; }
@@ -324,12 +330,15 @@
     opacity: 0; transform: scale(1.06); filter: blur(2px);
     transition: opacity .7s ease, transform 1.2s cubic-bezier(.2,.8,.2,1), filter .7s;
   }
-  .preview-dev { background-image: url("assets/dev-hero.jpg"); }
-  .preview-design { background-image: url("assets/design-hero.jpg"); }
+  /* screenshots are fetched only after the page has loaded (.hero.ready) */
+  .hero.ready .preview-dev { background-image: url("assets/dev-hero.webp"); }
+  .hero.ready .preview-design { background-image: url("assets/design-hero.webp"); }
   @media (max-width: 860px) {
     .preview { background-size: 100% auto; background-repeat: no-repeat; }
-    .preview-dev { background-image: url("assets/dev-hero-mobile.jpg"); background-color: #0b0d0d; }
-    .preview-design { background-image: url("assets/design-hero-mobile.jpg"); background-color: #2b2f28; }
+    .preview-dev { background-color: #0b0d0d; }
+    .preview-design { background-color: #2b2f28; }
+    .hero.ready .preview-dev { background-image: url("assets/dev-hero-mobile.webp"); }
+    .hero.ready .preview-design { background-image: url("assets/design-hero-mobile.webp"); }
     /* keep the tapped card small so the preview stays visible */
     .stage { transform: scale(.68) !important; }
     .card-hint { font-size: 17px; bottom: -40px; }
@@ -621,7 +630,7 @@
 
 <section class="about" id="about">
   <figure class="portrait reveal">
-    <div class="img"><img src="assets/charles.jpg" width="1100" height="1101" alt="Charles Toriola, developer and designer, in a black kaftan, checking his phone in a garden in Abuja" loading="lazy"></div>
+    <div class="img"><img src="assets/charles.webp" width="900" height="901" decoding="async" alt="Charles Toriola, developer and designer, in a black kaftan, checking his phone in a garden in Abuja" loading="lazy"></div>
     <figcaption><span>Charles Toriola</span><span>Abuja, 2026</span></figcaption>
   </figure>
   <div class="statement reveal">
@@ -644,11 +653,11 @@
 
     <div class="work-head reveal"><h3><span class="n">02</span>Creative</h3><a href="https://design.charlestoriola.com">Full gallery ↗</a></div>
     <div class="posters">
-      <a class="poster" href="https://design.charlestoriola.com"><div class="ph"><img width="720" height="1018" src="assets/work/poster-1.jpg" alt="Limitless typographic poster" loading="lazy"></div><p>Limitless<span>Typographic poster</span></p></a>
-      <a class="poster" href="https://design.charlestoriola.com"><div class="ph"><img width="720" height="1080" src="assets/work/poster-2.jpg" alt="Eid al-Maulud Mubarak poster" loading="lazy"></div><p>Eid al-Maulud<span>PrimeTEK Group</span></p></a>
-      <a class="poster" href="https://design.charlestoriola.com"><div class="ph"><img width="720" height="1080" src="assets/work/poster-3.jpg" alt="Independence Day poster" loading="lazy"></div><p>Independence Day<span>El-Panthomath Park</span></p></a>
-      <a class="poster" href="https://design.charlestoriola.com"><div class="ph"><img width="720" height="1080" src="assets/work/poster-4.jpg" alt="Eid al-Adha poster" loading="lazy"></div><p>Eid Mubarak<span>Campaign poster</span></p></a>
-      <a class="poster" href="https://design.charlestoriola.com"><div class="ph"><img width="720" height="900" src="assets/work/poster-5.jpg" alt="Speak Up poster against hate speech" loading="lazy"></div><p>Speak Up<span>Granny Murray Schools</span></p></a>
+      <a class="poster" href="https://design.charlestoriola.com"><div class="ph"><img width="560" height="792" decoding="async" src="assets/work/poster-1.webp" alt="Limitless typographic poster" loading="lazy"></div><p>Limitless<span>Typographic poster</span></p></a>
+      <a class="poster" href="https://design.charlestoriola.com"><div class="ph"><img width="560" height="840" decoding="async" src="assets/work/poster-2.webp" alt="Eid al-Maulud Mubarak poster" loading="lazy"></div><p>Eid al-Maulud<span>PrimeTEK Group</span></p></a>
+      <a class="poster" href="https://design.charlestoriola.com"><div class="ph"><img width="560" height="840" decoding="async" src="assets/work/poster-3.webp" alt="Independence Day poster" loading="lazy"></div><p>Independence Day<span>El-Panthomath Park</span></p></a>
+      <a class="poster" href="https://design.charlestoriola.com"><div class="ph"><img width="560" height="840" decoding="async" src="assets/work/poster-4.webp" alt="Eid al-Adha poster" loading="lazy"></div><p>Eid Mubarak<span>Campaign poster</span></p></a>
+      <a class="poster" href="https://design.charlestoriola.com"><div class="ph"><img width="560" height="700" decoding="async" src="assets/work/poster-5.webp" alt="Speak Up poster against hate speech" loading="lazy"></div><p>Speak Up<span>Granny Murray Schools</span></p></a>
     </div>
     <div class="also reveal">
       <div><h4>Two group rebrands</h4><p>Logos, brochures, decks and ID cards across PrimeTEK’s companies. Brochure turnaround went from weeks to days.</p></div>
@@ -732,6 +741,11 @@
     stage.addEventListener('mouseleave', () => activate(null));
   }
 
+  // Fetch the hover screenshots only once everything visible has loaded
+  const warm = () => hero.classList.add('ready');
+  if (document.readyState === 'complete') setTimeout(warm, 300); else addEventListener('load', () => setTimeout(warm, 300));
+  stage.addEventListener('pointerenter', warm, { once: true });
+
   // Start button: point the visitor at the cards
   document.getElementById('startBtn').addEventListener('click', e => {
     e.preventDefault();
@@ -751,13 +765,18 @@
     const r = title.getBoundingClientRect();
     gx = (e.clientX - r.left) / r.width; gy = (e.clientY - r.top) / r.height; lastMove = performance.now();
   });
-  (function loop(t) {
+  let heroVisible = true, running = false;
+  const kick = () => { if (!running && heroVisible && !document.hidden) { running = true; requestAnimationFrame(loop); } };
+  new IntersectionObserver(([e]) => { heroVisible = e.isIntersecting; kick(); }).observe(hero);
+  function loop(t) {
+    if (!heroVisible || document.hidden) { running = false; return; }
     if (t - lastMove > 1800) { gx = .5 + Math.sin(t / 2600) * .42; gy = .5 + Math.cos(t / 1900) * .35; }
     tx += (gx - tx) * .06; ty += (gy - ty) * .06;
     title.style.setProperty('--tx', (tx * 100).toFixed(2) + '%');
     title.style.setProperty('--ty', (ty * 100).toFixed(2) + '%');
     requestAnimationFrame(loop);
-  })(0);
+  }
+  document.addEventListener('visibilitychange', kick);
 
   // Rotating word
   const words = [...document.querySelectorAll('#rotator span')];
