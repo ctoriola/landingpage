@@ -227,7 +227,7 @@
     border-radius: 22px; padding: 26px;
     display: flex; flex-direction: column; justify-content: space-between;
     transform-style: preserve-3d;
-    transition: transform .7s cubic-bezier(.2,.8,.2,1), box-shadow .7s, filter .5s;
+    transition: transform .38s cubic-bezier(.2,.9,.25,1), box-shadow .38s, filter .25s, opacity .25s;
     will-change: transform;
     cursor: pointer;
     overflow: hidden;
@@ -258,7 +258,7 @@
   .card .cover {
     position: absolute; inset: 0; border-radius: inherit; z-index: 0;
     background-size: cover; background-repeat: no-repeat;
-    transition: transform 1.2s cubic-bezier(.2,.8,.2,1);
+    transition: transform .5s cubic-bezier(.2,.8,.2,1);
   }
   .card .cover::after { /* keep the labels legible over the photo */
     content: ""; position: absolute; inset: 0; border-radius: inherit;
@@ -328,7 +328,7 @@
     position: absolute; inset: 0; z-index: 3; pointer-events: none;
     background-size: cover; background-position: top center;
     opacity: 0; transform: scale(1.06); filter: blur(2px);
-    transition: opacity .7s ease, transform 1.2s cubic-bezier(.2,.8,.2,1), filter .7s;
+    transition: opacity .28s ease, transform .5s cubic-bezier(.2,.8,.2,1), filter .28s;
   }
   /* screenshots are fetched only after the page has loaded (.hero.ready) */
   .hero.ready .preview-dev { background-image: url("assets/dev-hero.webp"); }
