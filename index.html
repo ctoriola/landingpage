@@ -274,6 +274,18 @@
   .stage.is-dev .card-dev::before, .stage.is-design .card-design::before { opacity: 1; }
   .stage.is-dev .card-dev .go span, .stage.is-design .card-design .go span { transform: translateX(6px); }
 
+  .card-hint {
+    position: absolute; left: 50%; bottom: -22px; transform: translateX(-50%); z-index: 6; pointer-events: none;
+    display: inline-flex; align-items: center; gap: 10px; white-space: nowrap;
+    font: 400 11px/1 "JetBrains Mono", ui-monospace, Menlo, monospace; letter-spacing: .08em; color: var(--muted);
+    transition: opacity .4s;
+  }
+  .card-hint::before { content: ""; width: 6px; height: 6px; border-radius: 50%; background: var(--blue-soft); box-shadow: 0 0 10px var(--blue-soft); animation: blink 1.6s ease-in-out infinite; }
+  @keyframes blink { 50% { opacity: .25; } }
+  .card-hint .for-touch { display: none; }
+  body.touch .card-hint .for-touch { display: inline; }
+  body.touch .card-hint .for-mouse { display: none; }
+  .stage.is-dev .card-hint, .stage.is-design .card-hint { opacity: 0; }
   .hit { position: absolute; top: 0; bottom: 0; width: 50%; z-index: 5; border-radius: 22px; }
   .hit-dev { left: 0; } .hit-design { right: 0; }
   .hit:focus-visible { outline: 2px solid var(--blue-soft); outline-offset: 4px; }
@@ -297,6 +309,8 @@
     .preview-design { background-image: url("assets/design-hero-mobile.jpg"); background-color: #2b2f28; }
     /* keep the tapped card small so the preview stays visible */
     .stage { transform: scale(.68) !important; }
+    .card-hint { font-size: 17px; bottom: -40px; }
+    .card-hint::before { width: 9px; height: 9px; }
     .card-dev { --hx: -60px; } .card-design { --hx: 60px; }
     .stage.is-dev .card-dev, .stage.is-design .card-design { transform: translate3d(var(--hx), 30px, 20px); }
     .stage.is-dev .card-design { transform: translate3d(150px, 40px, -160px) rotateY(-30deg) rotateZ(12deg); opacity: .5; }
@@ -498,6 +512,7 @@
   <div class="stage" id="stage">
     <div class="glow-floor"></div>
     <span class="tap-hint" id="tapHint">Tap again to visit</span>
+    <span class="card-hint" aria-hidden="true"><span class="for-mouse">Hover a card to preview · click to enter</span><span class="for-touch">Tap a card to preview · tap again to enter</span></span>
     <a class="hit hit-dev" data-site="dev" href="https://dev.charlestoriola.com" aria-label="Development work — dev.charlestoriola.com"></a>
     <a class="hit hit-design" data-site="design" href="https://design.charlestoriola.com" aria-label="Design work — design.charlestoriola.com"></a>
     <div class="floaty">
@@ -558,7 +573,7 @@
     <div class="eyebrow">// Hi, I’m Charles</div>
     <h2>10<span class="x">x</span> Developer.<span class="l2">10<span class="x">x</span> Designer.</span></h2>
     <p class="bio">Computer Science grad, former PHP developer, now <b>Creative Lead at PrimeTEK Group</b>, running brand and production for five companies. I still ship software, and I still open After Effects on weekends.</p>
-    <p class="bio">I lead a two-person creative team, run twice-weekly livestreams on an ATEM switcher, and once delivered a full product catalogue in five hours.</p>
+    <p class="bio">I lead a two-person creative team and run twice-weekly livestreams on an ATEM switcher.</p>
   </div>
 </section>
 
