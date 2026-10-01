@@ -173,6 +173,26 @@
   }
   .preview-dev { background-image: url("assets/dev-hero.jpg"); }
   .preview-design { background-image: url("assets/design-hero.jpg"); }
+  @media (max-width: 860px) {
+    .preview { background-size: 100% auto; background-repeat: no-repeat; }
+    .preview-dev { background-image: url("assets/dev-hero-mobile.jpg"); background-color: #0b0d0d; }
+    .preview-design { background-image: url("assets/design-hero-mobile.jpg"); background-color: #2b2f28; }
+    /* keep the tapped card small so the preview stays visible */
+    .stage { transform: scale(.68) !important; }
+    .card-dev { --hx: -60px; } .card-design { --hx: 60px; }
+    .stage.is-dev .card-dev, .stage.is-design .card-design { transform: translate3d(var(--hx), 30px, 20px); }
+    .stage.is-dev .card-design { transform: translate3d(150px, 40px, -160px) rotateY(-30deg) rotateZ(12deg); opacity: .5; }
+    .stage.is-design .card-dev { transform: translate3d(-150px, 40px, -160px) rotateY(36deg) rotateZ(-18deg); opacity: .5; }
+    .tap-hint { transform: translate(-50%, 10px) scale(1.47); }
+    body.touch .stage.is-dev .tap-hint, body.touch .stage.is-design .tap-hint { transform: translate(-50%, 30px) scale(1.47); }
+  }
+  .tap-hint {
+    position: absolute; left: 50%; bottom: -8px; transform: translate(-50%, 10px); z-index: 6;
+    font-size: 12px; color: var(--ink); white-space: nowrap; opacity: 0; pointer-events: none;
+    padding: 8px 14px; border-radius: 999px; background: rgba(3,6,13,.7); border: 1px solid rgba(255,255,255,.15);
+    backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px); transition: opacity .4s, transform .4s;
+  }
+  body.touch .stage.is-dev .tap-hint, body.touch .stage.is-design .tap-hint { opacity: 1; transform: translate(-50%, 0); }
   .hero.show-dev .preview-dev, .hero.show-design .preview-design { opacity: 1; transform: scale(1); filter: none; }
   /* the preview fully covers the original hero; only the cards stay on top */
   .stage { z-index: 4; }
@@ -265,6 +285,7 @@
 
   <div class="stage" id="stage">
     <div class="glow-floor"></div>
+    <span class="tap-hint" id="tapHint">Tap again to visit</span>
     <a class="hit hit-dev" data-site="dev" href="https://dev.charlestoriola.com" aria-label="Development work — dev.charlestoriola.com"></a>
     <a class="hit hit-design" data-site="design" href="https://design.charlestoriola.com" aria-label="Design work — design.charlestoriola.com"></a>
     <div class="floaty">
@@ -346,9 +367,25 @@
     document.body.classList.toggle('previewing', !!site);
     if (site) { stage.classList.add('is-' + site); hero.classList.add('show-' + site); }
   };
+  // Touch screens can't hover: first tap previews, a second tap on the same card visits it
+  const isTouch = window.matchMedia('(hover: none)').matches;
+  if (isTouch) document.body.classList.add('touch');
+  let armed = null;
+
   document.querySelectorAll('.hit').forEach(hit => {
     const site = hit.dataset.site;
     const card = document.querySelector('.card-' + site);
+
+    if (isTouch) {
+      hit.addEventListener('click', e => {
+        if (armed === site) return; // second tap: follow the link
+        e.preventDefault();
+        armed = site;
+        activate(site);
+      });
+      return;
+    }
+
     hit.addEventListener('mouseenter', () => activate(site));
     hit.addEventListener('focus', () => activate(site));
     hit.addEventListener('blur', () => activate(null));
@@ -365,7 +402,14 @@
       ['--rx', '--ry', '--mx', '--my'].forEach(p => card.style.removeProperty(p));
     });
   });
-  stage.addEventListener('mouseleave', () => activate(null));
+  if (isTouch) {
+    // tapping anywhere outside the cards dismisses the preview
+    document.addEventListener('click', e => {
+      if (!e.target.closest('.hit')) { armed = null; activate(null); }
+    });
+  } else {
+    stage.addEventListener('mouseleave', () => activate(null));
+  }
 
   // Starfield
   const stars = document.getElementById('stars');
